@@ -11,7 +11,7 @@ function FooterSocialLinkItem({
     <li>
       <a href={socialUrl}>
         <img
-          src={`${process.env.PUBLIC_URL}/assets/images/${socialServiceName}_icon.svg`}
+          src={`/assets/images/${socialServiceName}_icon.svg`}
           alt={`${altImageName}_icon_image`}
         ></img>
       </a>
