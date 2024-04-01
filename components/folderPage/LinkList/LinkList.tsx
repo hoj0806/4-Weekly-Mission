@@ -1,6 +1,6 @@
 import styles from "./LinkList.module.css";
 import { Dispatch, SetStateAction } from "react";
-import { FolderIdData } from "@/api/folderPageLinkData";
+import { LinkDataType } from "@/types/LinkDataTypes";
 import FolderPageLinkItem from "../FolderPageLinkItem/FolderPageLinkItem";
 
 interface LinkListProps {
@@ -8,7 +8,7 @@ interface LinkListProps {
     e: React.MouseEvent<HTMLImageElement | HTMLButtonElement>
   ) => void;
   setSharedUrl: Dispatch<SetStateAction<string>>;
-  linkData: FolderIdData | null;
+  linkData: LinkDataType | null;
 }
 
 const LinkList = ({
