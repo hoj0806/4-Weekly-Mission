@@ -24,11 +24,17 @@ const LinkFuncButton = ({
       className={styles.link_func_button}
       onClick={(e) => {
         if (buttonName === "이름 변경") {
-          handleRenameFolderModalClick(e);
+          () => {
+            handleRenameFolderModalClick(e);
+          };
         } else if (buttonName === "삭제") {
-          handleDeleteFolderModalClick(e);
+          () => {
+            handleDeleteFolderModalClick(e);
+          };
         } else if (buttonName === "공유") {
-          handleShareFolderModalClick(e);
+          () => {
+            handleDeleteFolderModalClick(e);
+          };
         }
       }}
     >

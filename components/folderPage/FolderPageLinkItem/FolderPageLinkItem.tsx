@@ -42,7 +42,7 @@ const FolderPageLinkItem = ({
           <div className={styles.item_card_image_box}>
             {!image_source ? (
               <img
-                src={`${process.env.PUBLIC_URL}/assets/images/folder_no_image.svg`}
+                src='/assets/images/folder_no_image.svg'
                 className={styles.item_card_image}
                 alt='card_no_image'
               />

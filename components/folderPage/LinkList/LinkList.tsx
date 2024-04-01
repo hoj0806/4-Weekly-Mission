@@ -24,16 +24,15 @@ const LinkList = ({
         <div className={styles.item_card_grid}>
           {linkData?.data.map((item) => {
             return (
-              <div key={"LinkList" + item.id}>
-                <FolderPageLinkItem
-                  {...item}
-                  handleAddLinkInFolderModalClick={
-                    handleAddLinkInFolderModalClick
-                  }
-                  setSharedUrl={setSharedUrl}
-                  date={item.created_at.slice(0, 10)}
-                />
-              </div>
+              <FolderPageLinkItem
+                {...item}
+                handleAddLinkInFolderModalClick={
+                  handleAddLinkInFolderModalClick
+                }
+                setSharedUrl={setSharedUrl}
+                date={item.created_at.slice(0, 10)}
+                key={item.id}
+              />
             );
           })}
         </div>

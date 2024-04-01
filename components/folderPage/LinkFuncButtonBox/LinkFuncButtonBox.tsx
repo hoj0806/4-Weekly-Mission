@@ -20,18 +20,19 @@ interface ButtonData {
 interface LinkFunkButtonDataType {
   funcButtons: ButtonData[];
 }
+
+const linkFuncButtonDatas: LinkFunkButtonDataType = {
+  funcButtons: [
+    { buttonName: "공유", buttonImageSourceName: "share", id: 0 },
+    { buttonName: "이름 변경", buttonImageSourceName: "rename", id: 1 },
+    { buttonName: "삭제", buttonImageSourceName: "delete", id: 2 },
+  ],
+};
 const LinkFuncButtonBox = ({
   handleRenameFolderModalClick,
   handleDeleteFolderModalClick,
   handleShareFolderModalClick,
 }: LinkFuncButtonBoxProps) => {
-  const linkFuncButtonDatas: LinkFunkButtonDataType = {
-    funcButtons: [
-      { buttonName: "공유", buttonImageSourceName: "share", id: 0 },
-      { buttonName: "이름 변경", buttonImageSourceName: "rename", id: 1 },
-      { buttonName: "삭제", buttonImageSourceName: "delete", id: 2 },
-    ],
-  };
   return (
     <div className={styles.link_func_button_box_wrapper}>
       {linkFuncButtonDatas.funcButtons.map(

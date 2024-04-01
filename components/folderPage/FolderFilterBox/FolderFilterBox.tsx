@@ -23,30 +23,36 @@ const FolderFilterBox = ({
 }: FolderFilterBoxProps) => {
   const [activeFilterId, setActiveFilterId] = useState("showAll");
 
+  const handleClickFilterButton = (folderName: string, folderId: number) => {
+    setIsShowFuncButtonBox(true);
+    setFolderName(folderName);
+    setFolderId("?folderId=" + String(folderId));
+    setActiveFilterId(folderId.toString());
+    setFolderModalValue(folderName);
+    setShareUrlFolderId(folderId.toString());
+  };
+
+  const handleClickShowAllLinksButton = () => {
+    setFolderName("전체");
+    setIsShowFuncButtonBox(false);
+    setFolderId("");
+    setActiveFilterId("showAll");
+  };
   return (
     <div className={styles.link_filter_box}>
       <ShowAllLinksButton
         name='전체'
-        setFolderName={setFolderName}
-        setIsShowFuncButtonBox={setIsShowFuncButtonBox}
-        setFolderId={setFolderId}
-        setActiveFilterId={setActiveFilterId}
         activeFilterId={activeFilterId}
+        handleClick={() => handleClickShowAllLinksButton()}
       />
 
       {folderData?.data.map(({ name, id }) => {
         return (
           <FolderFilterButton
             name={name}
-            id={String(id)}
             key={id}
-            setFolderName={setFolderName}
-            setFolderId={setFolderId}
-            setIsShowFuncButtonBox={setIsShowFuncButtonBox}
-            setActiveFilterId={setActiveFilterId}
             isActive={activeFilterId === String(id)}
-            setFolderModalValue={setFolderModalValue}
-            setShareUrlFolderId={setShareUrlFolderId}
+            handleClick={() => handleClickFilterButton(name, id)}
           />
         );
       })}

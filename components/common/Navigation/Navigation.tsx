@@ -1,20 +1,20 @@
 import styles from "./Navigation.module.css";
 import { getUserData } from "@/api/userData";
 import NavLoginButton from "../NavLoginButton/NavLoginButton";
-
+import Link from "next/link";
 const Navigation = async () => {
   const userData = await getUserData();
 
   return (
     <div className={styles["nav-wrapper"]}>
       <div className={styles["nav-inside-wrapper"]}>
-        <a href='/'>
+        <Link href='/'>
           <img
             className={styles["header-logo"]}
             src='/assets/images/nav_logo.svg'
             alt='Linkbrary_logo'
           />
-        </a>
+        </Link>
         <div className={styles["profile-wrapper"]}>
           {!userData.email ? (
             <NavLoginButton />

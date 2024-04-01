@@ -1,37 +1,14 @@
 import styles from "./FolderFilterButton.module.css";
-import { Dispatch, SetStateAction } from "react";
 interface FolderFilterButtonProps {
   name: string;
-  id: string;
-  setIsShowFuncButtonBox: Dispatch<SetStateAction<boolean>>;
-  setFolderName: Dispatch<SetStateAction<string>>;
-  setFolderId: Dispatch<SetStateAction<string>>;
-  setActiveFilterId: Dispatch<SetStateAction<string>>;
   isActive: boolean;
-  setFolderModalValue: Dispatch<SetStateAction<string>>;
-  setShareUrlFolderId: Dispatch<SetStateAction<string>>;
+  handleClick: () => void;
 }
-
 const FolderFilterButton = ({
   name,
-  id,
-  setIsShowFuncButtonBox,
-  setFolderName,
-  setFolderId,
-  setActiveFilterId,
   isActive,
-  setFolderModalValue,
-  setShareUrlFolderId,
+  handleClick,
 }: FolderFilterButtonProps) => {
-  function handleClick() {
-    setIsShowFuncButtonBox(true);
-    setFolderName(name);
-    setFolderId("?folderId=" + id);
-    setActiveFilterId(id);
-    setFolderModalValue(name);
-    setShareUrlFolderId(id);
-  }
-
   return (
     <>
       <button
