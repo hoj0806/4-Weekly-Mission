@@ -1,5 +1,5 @@
-import { FormEvent, Dispatch, SetStateAction, ChangeEvent } from 'react';
-import styles from './LinkSearchInput.module.css';
+import { FormEvent, Dispatch, SetStateAction, ChangeEvent } from "react";
+import styles from "./LinkSearchInput.module.css";
 
 interface FolderDesc {
   id: number;
@@ -26,14 +26,14 @@ interface LinkSearchProps {
   setViewData: Dispatch<SetStateAction<string | null>>;
 }
 
-function LinkSearchInput({
+const LinkSearchInput = ({
   setViewSearchData,
   searchData,
   setSearchData,
   setFilterData,
   folderId,
   setViewData,
-}: LinkSearchProps) {
+}: LinkSearchProps) => {
   async function fetchData() {
     await fetch(`https://bootcamp-api.codeit.kr/api/users/3/links${folderId}`)
       .then((res) => res.json())
@@ -69,7 +69,7 @@ function LinkSearchInput({
   const onClickCancleIcon = (e: React.MouseEvent<HTMLImageElement>) => {
     fetchData();
     setViewSearchData(false);
-    setSearchData('');
+    setSearchData("");
   };
 
   return (
@@ -78,23 +78,23 @@ function LinkSearchInput({
         <input
           className={styles.link_search_input}
           placeholder='링크를 검색해 보세요.'
-          value={searchData || ''}
+          value={searchData || ""}
           onChange={handleInputChange}
         ></input>
         <img
-          src={`${process.env.PUBLIC_URL}/assets/images/search_icon.svg`}
+          src='/assets/images/search_icon.svg'
           className={styles.search_icon}
           alt='search_icon'
         />
         <img
-          className={styles['input_close_icon']}
-          src={`${process.env.PUBLIC_URL}/assets/images/search_input_close_icon.svg`}
+          className={styles["input_close_icon"]}
+          src='/assets/images/search_input_close_icon.svg'
           alt='검색 취소 아이콘'
           onClick={onClickCancleIcon}
         />
       </form>
     </div>
   );
-}
+};
 
 export default LinkSearchInput;
