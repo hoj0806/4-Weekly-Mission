@@ -1,8 +1,10 @@
 import styles from "./Navigation.module.css";
+import { getUserData } from "@/api/userData";
 import NavLoginButton from "../NavLoginButton/NavLoginButton";
-const userDataUrl = "https://bootcamp-api.codeit.kr/api/sample/user";
 
-function Navigation() {
+const Navigation = async () => {
+  const userData = await getUserData();
+
   return (
     <div className={styles["nav-wrapper"]}>
       <div className={styles["nav-inside-wrapper"]}>
@@ -13,23 +15,23 @@ function Navigation() {
             alt='Linkbrary_logo'
           />
         </a>
-        {/* <div className={styles["profile-wrapper"]}>
-          {!userData?.email ? (
+        <div className={styles["profile-wrapper"]}>
+          {!userData.email ? (
             <NavLoginButton />
           ) : (
             <>
               <img
-                src={userData?.profileImageSource}
+                src={userData.image_source}
                 alt='user_profile_image'
                 className={styles["nav-profile-image"]}
               />
               <p className={styles["profile-email"]}>{userData.email}</p>
             </>
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Navigation;
