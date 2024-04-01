@@ -2,6 +2,7 @@ import styles from "./Navigation.module.css";
 import { getUserData } from "@/api/userData";
 import NavLoginButton from "../NavLoginButton/NavLoginButton";
 import Link from "next/link";
+import Image from "next/image";
 const Navigation = async () => {
   const userData = await getUserData();
 
@@ -9,10 +10,12 @@ const Navigation = async () => {
     <div className={styles["nav-wrapper"]}>
       <div className={styles["nav-inside-wrapper"]}>
         <Link href='/'>
-          <img
+          <Image
             className={styles["header-logo"]}
             src='/assets/images/nav_logo.svg'
             alt='Linkbrary_logo'
+            width='133'
+            height='24'
           />
         </Link>
         <div className={styles["profile-wrapper"]}>

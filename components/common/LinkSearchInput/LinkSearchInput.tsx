@@ -1,7 +1,7 @@
 import { FormEvent, Dispatch, SetStateAction, ChangeEvent } from "react";
 import styles from "./LinkSearchInput.module.css";
 import { LinkDataType } from "@/types/LinkDataTypes";
-
+import Image from "next/image";
 interface LinkSearchProps {
   setViewSearchData: Dispatch<SetStateAction<boolean | null>>;
   searchData: string | null;
@@ -68,16 +68,22 @@ const LinkSearchInput = ({
           value={searchData || ""}
           onChange={handleInputChange}
         ></input>
-        <img
+
+        <Image
           src='/assets/images/search_icon.svg'
           className={styles.search_icon}
           alt='search_icon'
+          width='16'
+          height='16'
         />
-        <img
+
+        <Image
           className={styles["input_close_icon"]}
           src='/assets/images/search_input_close_icon.svg'
           alt='검색 취소 아이콘'
           onClick={onClickCancleIcon}
+          width='24'
+          height='24'
         />
       </form>
     </div>

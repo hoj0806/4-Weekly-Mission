@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface FooterSocialLinkItemProps {
   socialServiceName: string;
   socialUrl: string;
@@ -12,10 +14,12 @@ const FooterSocialLinkItem = ({
   return (
     <li>
       <a href={socialUrl}>
-        <img
+        <Image
           src={`/assets/images/${socialServiceName}_icon.svg`}
           alt={`${altImageName}_icon_image`}
-        ></img>
+          width='20'
+          height='20'
+        />
       </a>
     </li>
   );

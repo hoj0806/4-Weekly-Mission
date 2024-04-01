@@ -2,6 +2,7 @@ import styles from "./AddLinkInput.module.css";
 import AddLinkButton from "../AddLinkButton/AddLinkButton";
 import { ChangeEvent } from "react";
 import { Dispatch, SetStateAction } from "react";
+import Image from "next/image";
 
 interface AddLinkInputProps {
   handleAddLinkInFolderModalClick: (
@@ -25,11 +26,14 @@ const AddLinkInput = ({
           placeholder='링크를 추가해 보세요'
           onChange={handleInputChange}
         />
-        <img
+        <Image
           src='/assets/images/add_link_input_icon.svg'
           alt='add_link_input_icon'
           className={styles["add-link-input-icon"]}
+          width='20'
+          height='20'
         />
+
         <AddLinkButton
           handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
         />
