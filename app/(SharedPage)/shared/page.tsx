@@ -1,5 +1,11 @@
+import Profile from "@/components/sharedPage/Profile/Profile";
+
 const SharedPage = () => {
-  return <h1>Shared Page</h1>;
+  return (
+    <>
+      <Profile />
+    </>
+  );
 };
 
 export default SharedPage;
