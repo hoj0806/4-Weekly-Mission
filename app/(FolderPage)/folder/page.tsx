@@ -3,8 +3,9 @@
 import useModal from "@/hooks/useModal";
 import { useState } from "react";
 import AddLink from "@/components/folderPage/AddLink/AddLink";
+import FolderPageMain from "@/components/folderPage/FolderPageMain/FolderPageMain";
+
 const FolderPage = () => {
-  
   const {
     isShowModal: isShowAddLinkInFolderModal,
     handleModalClick: handleAddLinkInFolderModalClick,
@@ -15,6 +16,12 @@ const FolderPage = () => {
     <>
       <AddLink
         handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+        setSharedUrl={setSharedUrl}
+      />
+      <FolderPageMain
+        isShowAddLinkInFolderModal={isShowAddLinkInFolderModal}
+        handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+        sharedUrl={sharedUrl}
         setSharedUrl={setSharedUrl}
       />
     </>

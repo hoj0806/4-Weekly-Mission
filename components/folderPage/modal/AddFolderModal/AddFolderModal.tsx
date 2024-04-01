@@ -1,21 +1,21 @@
-import styles from './AddFolderModal.module.css';
-import ModalButton from '../ModalButton/ModalButton';
-import ModalWrapper from '../ModalWrapper/ModalWrapper';
+import styles from "./AddFolderModal.module.css";
+import ModalButton from "../ModalButton/ModalButton";
+import ModalWrapper from "../ModalWrapper/ModalWrapper";
 
-export default function AddFolderModal({
+const AddFolderModal = ({
   handleAddFolderModalClick,
 }: {
   handleAddFolderModalClick: (e: React.MouseEvent<HTMLImageElement>) => void;
-}) {
+}) => {
   return (
     <ModalWrapper>
-      <div className={styles['modal-wrapper']}>
-        <div className={styles['modal-main-wrapper']}>
-          <div className={styles['modal-title']}>폴더 추가</div>
-          <input className={styles['modal-input']} placeholder='내용 입력' />
+      <div className={styles["modal-wrapper"]}>
+        <div className={styles["modal-main-wrapper"]}>
+          <div className={styles["modal-title"]}>폴더 추가</div>
+          <input className={styles["modal-input"]} placeholder='내용 입력' />
           <img
-            src={`${process.env.PUBLIC_URL}/assets/images/modal_close_icon.svg`}
-            className={styles['modal-close-icon']}
+            src='/assets/images/modal_close_icon.svg'
+            className={styles["modal-close-icon"]}
             alt='modal-close-icon'
             onClick={handleAddFolderModalClick}
           />
@@ -24,4 +24,6 @@ export default function AddFolderModal({
       </div>
     </ModalWrapper>
   );
-}
+};
+
+export default AddFolderModal;

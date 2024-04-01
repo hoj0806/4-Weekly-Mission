@@ -1,27 +1,13 @@
 import { FormEvent, Dispatch, SetStateAction, ChangeEvent } from "react";
 import styles from "./LinkSearchInput.module.css";
-
-interface FolderDesc {
-  id: number;
-  created_at: string;
-  updated_at: null;
-  url: string;
-  title: string;
-  description: string;
-  image_source: string;
-  folder_id: number;
-}
-
-interface FolderIdData {
-  data: FolderDesc[];
-}
+import { LinkDataType } from "@/types/LinkDataTypes";
 
 interface LinkSearchProps {
   setViewSearchData: Dispatch<SetStateAction<boolean | null>>;
   searchData: string | null;
   setSearchData: Dispatch<SetStateAction<string | null>>;
-  setFilterData: Dispatch<SetStateAction<FolderIdData | null>>;
-  filterData: FolderIdData | null;
+  setLinkData: Dispatch<SetStateAction<LinkDataType | null>>;
+  linkData: LinkDataType | null;
   folderId: string;
   setViewData: Dispatch<SetStateAction<string | null>>;
 }
@@ -30,20 +16,21 @@ const LinkSearchInput = ({
   setViewSearchData,
   searchData,
   setSearchData,
-  setFilterData,
+  setLinkData,
   folderId,
   setViewData,
 }: LinkSearchProps) => {
-  async function fetchData() {
+  const fetchData = async () => {
     await fetch(`https://bootcamp-api.codeit.kr/api/users/3/links${folderId}`)
       .then((res) => res.json())
-      .then((result) => setFilterData(result));
-  }
-  async function handleFilterClick() {
+      .then((result) => setLinkData(result));
+  };
+
+  const handleFilterClick = async () => {
     await fetch(`https://bootcamp-api.codeit.kr/api/users/3/links${folderId}`)
       .then((res) => res.json())
-      .then((result) => setFilterData(result));
-    setFilterData((prev) => ({
+      .then((result) => setLinkData(result));
+    setLinkData((prev) => ({
       ...prev,
       data:
         prev?.data?.filter(
@@ -54,7 +41,7 @@ const LinkSearchInput = ({
               i.url.toUpperCase().includes(searchData.toUpperCase()))
         ) || [],
     }));
-  }
+  };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setViewSearchData(true);
