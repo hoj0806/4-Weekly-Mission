@@ -1,14 +1,16 @@
-import styles from './AddLinkButton.module.css';
+import styles from "./AddLinkButton.module.css";
 
-interface ClickFunction {
+interface AddLinkButtonProps {
   handleAddLinkInFolderModalClick: (
     e: React.MouseEvent<HTMLButtonElement>
   ) => void;
 }
-function AddLinkButton({ handleAddLinkInFolderModalClick }: ClickFunction) {
+function AddLinkButton({
+  handleAddLinkInFolderModalClick,
+}: AddLinkButtonProps) {
   return (
     <button
-      className={styles['add-link-button']}
+      className={styles["add-link-button"]}
       onClick={handleAddLinkInFolderModalClick}
     >
       추가하기
