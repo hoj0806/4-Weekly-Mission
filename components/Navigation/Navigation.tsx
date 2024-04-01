@@ -10,7 +10,7 @@ function Navigation() {
           <img
             className={styles["header-logo"]}
             src='/assets/images/nav_logo.svg'
-            alt='Linkbrary_logo'q
+            alt='Linkbrary_logo'
           />
         </a>
         {/* <div className={styles["profile-wrapper"]}>

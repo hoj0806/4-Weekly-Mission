@@ -41,7 +41,7 @@ const socialNetworkServiceName: SocialBoxType = {
   ],
 };
 
-function FooterSocialLinkBox() {
+const FooterSocialLinkBox = () => {
   return (
     <ul className={styles["social-icon-wrapper"]}>
       {socialNetworkServiceName.socialNetworkServices.map(
@@ -56,6 +56,6 @@ function FooterSocialLinkBox() {
       )}
     </ul>
   );
-}
+};
 
 export default FooterSocialLinkBox;

@@ -1,6 +1,6 @@
 import styles from './Footer.module.css';
 import FooterSocialLinkBox from './FooterSocialLinkBox';
-function Footer() {
+const Footer = () => {
   return (
     <div className={styles['footer-wrapper']}>
       <div className={styles['footer-inside-wrapper']}>

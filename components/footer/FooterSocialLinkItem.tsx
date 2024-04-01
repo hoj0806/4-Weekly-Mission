@@ -4,11 +4,11 @@ interface FooterSocialLinkItemProps {
   altImageName: string;
 }
 
-function FooterSocialLinkItem({
+const FooterSocialLinkItem = ({
   socialServiceName,
   socialUrl,
   altImageName,
-}: FooterSocialLinkItemProps) {
+}: FooterSocialLinkItemProps) => {
   return (
     <li>
       <a href={socialUrl}>
@@ -19,6 +19,6 @@ function FooterSocialLinkItem({
       </a>
     </li>
   );
-}
+};
 
 export default FooterSocialLinkItem;
