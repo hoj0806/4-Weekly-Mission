@@ -1,12 +1,14 @@
+interface FooterSocialLinkItemProps {
+  socialServiceName: string;
+  socialUrl: string;
+  altImageName: string;
+}
+
 function FooterSocialLinkItem({
   socialServiceName,
   socialUrl,
   altImageName,
-}: {
-  socialServiceName: string;
-  socialUrl: string;
-  altImageName: string;
-}) {
+}: FooterSocialLinkItemProps) {
   return (
     <li>
       <a href={socialUrl}>
