@@ -1,17 +1,16 @@
 import styles from "./SignInForm.module.css";
 
 const SignInForm = () => {
-
   return (
     <>
-      <form>
-        <div>
+      <form className={styles["sign_form"]}>
+        <div className={styles["sign_input_box"]}>
           <label>이메일</label>
-          <input />
+          <input className={styles["sign_input"]} />
         </div>
-        <div>
+        <div className={styles["sign_input_box"]}>
           <label>비밀번호</label>
-          <input />
+          <input className={styles["sign_input"]} />
         </div>
       </form>
       <div className={styles["footer_wrapper"]}>
@@ -19,8 +18,12 @@ const SignInForm = () => {
         <div className={styles["social_sign_box"]}>
           <div className={styles["social_sign_text_box"]}>소셜 로그인</div>
           <div className={styles["social_sign_icon_box"]}>
-            <img src='/assets/images/social_sign_google_icon.svg' />
-            <img src='/assets/images/social_sign_kakao_icon.svg' />
+            <button>
+              <img src='/assets/images/social_sign_google_icon.svg' />
+            </button>
+            <button>
+              <img src='/assets/images/social_sign_kakao_icon.svg' />
+            </button>
           </div>
         </div>
       </div>

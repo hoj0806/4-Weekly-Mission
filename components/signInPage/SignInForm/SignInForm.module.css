@@ -20,6 +20,7 @@
   font-family: var(--Pretendard-Regular);
   font-size: 1.8rem;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .social_sign_box {
@@ -43,4 +44,34 @@
 .social_sign_icon_box {
   display: flex;
   gap: 1.6rem;
+}
+.social_sign_icon_box button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.sign_form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.sign_input_box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sign_input_box label {
+  color: var(--black, #000);
+  font-family: var(--Pretendard-Regular);
+  font-size: 1.4rem;
+}
+
+.sign_input {
+  width: 400px;
+  padding: 18px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccd5e3;
+  background: #fff;
 }
