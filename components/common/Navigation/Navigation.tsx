@@ -19,7 +19,11 @@ const Navigation = async () => {
           />
         </Link>
         <div className={styles["profile-wrapper"]}>
-          {!userData.email ? (
+          <Link href='/signin'>
+            <NavLoginButton />
+          </Link>
+
+          {/* {!userData.email ? (
             <NavLoginButton />
           ) : (
             <>
@@ -30,7 +34,7 @@ const Navigation = async () => {
               />
               <p className={styles["profile-email"]}>{userData.email}</p>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </div>
