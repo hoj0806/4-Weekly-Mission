@@ -1,0 +1,7 @@
+.info_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  margin-top: 12rem;
+  margin-bottom: 17rem;
+}

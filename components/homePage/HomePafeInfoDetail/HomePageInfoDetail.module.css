@@ -1,0 +1,28 @@
+.info_wrapper {
+  display: flex;
+  gap: 15.7rem;
+  justify-content: center;
+}
+
+.info_text_box {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.info_title {
+  color: #000;
+  font-family: var(--Pretendard-Regular);
+  font-size: 4.8rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.info_desciption {
+  color: #6b6b6b;
+  font-family: var(--Pretendard-Regular);
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
