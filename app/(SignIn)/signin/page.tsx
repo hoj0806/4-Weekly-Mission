@@ -4,12 +4,10 @@ import styles from "@/styles/Sign.module.css";
 
 const SignInPage = () => {
   return (
-    <>
-      <div className={styles["sign_wrapper"]}>
-        <SignHeader />
-        <SignInForm />
-      </div>
-    </>
+    <div className={styles["sign_wrapper"]}>
+      <SignHeader />
+      <SignInForm />
+    </div>
   );
 };
 

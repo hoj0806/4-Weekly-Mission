@@ -30,10 +30,10 @@ const homePageInfoData: HomePageInfoTypes = {
               WebkitTextFillColor: "transparent",
             }}
           >
-            원하는 링크를
+            원하는 링크
           </span>
-          <br />
-          저장하세요
+          를
+          <br /> 저장하세요
         </div>
       ),
 
