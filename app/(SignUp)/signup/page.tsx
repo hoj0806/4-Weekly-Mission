@@ -3,7 +3,9 @@ import SignHeader from "@/components/common/SignHeader/SignHeader";
 const SignUpPage = () => {
   return (
     <>
-      <SignHeader />
+      <>
+        <SignHeader />
+      </>
     </>
   );
 };
