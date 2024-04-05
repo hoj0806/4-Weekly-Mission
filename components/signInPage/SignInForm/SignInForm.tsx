@@ -47,9 +47,6 @@ const SignInForm = () => {
       console.log(error);
     }
   };
-  const handleSuccess = () => {
-    console.log("로그인 성공");
-  };
 
   return (
     <>

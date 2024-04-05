@@ -68,7 +68,7 @@
   font-size: 1.4rem;
 }
 
-.sign_input {
+.sign_form input {
   width: 400px;
   padding: 18px 15px;
   border-radius: 8px;
@@ -76,3 +76,15 @@
   background: #fff;
 }
 
+.sign_form input:focus {
+  outline: 1px solid #6d6afe;
+}
+.invalid {
+  outline: 1px solid #ff5b56;
+}
+
+.input_error_message {
+  color: var(--Linkbrary-red, #ff5b56);
+  font-family: Pretendard;
+  font-size: 1.4rem;
+}
