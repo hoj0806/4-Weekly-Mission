@@ -18,12 +18,33 @@ const SignInForm = () => {
   const [emailLoginError, setEmailLoginError] = useState("");
   const [passwordLoginError, setPasswordLoginError] = useState("");
 
-  const onSubmit = (data: FormValueType) => {
-    if (data.email !== "test@codeit.com" && data.password !== "sprint101") {
-      setEmailLoginError("이메일을 확인해 주세요.");
-      setPasswordLoginError("비밀번호를 확인해 주세요.");
-    } else {
-      handleSuccess();
+  const onSubmit = async (data: FormValueType) => {
+    try {
+      const response = await fetch(
+        "https://bootcamp-api.codeit.kr/api/sign-in",
+        {
+          method: "POST",
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        }
+      );
+      if (!response.ok) {
+        setEmailLoginError("이메일을 확인해 주세요.");
+        setPasswordLoginError("비밀번호를 확인해 주세요.");
+        return;
+      }
+      const json = await response.json();
+      const accessToken = json.data.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+      console.log(accessToken);
+    } catch (error) {
+      console.log(error);
     }
   };
   const handleSuccess = () => {
