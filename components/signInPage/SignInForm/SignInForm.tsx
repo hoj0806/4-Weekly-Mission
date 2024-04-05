@@ -2,7 +2,6 @@
 
 import styles from "./SignInForm.module.css";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { useState } from "react";
 
 interface FormValueType {
@@ -12,26 +11,25 @@ interface FormValueType {
 const SignInForm = () => {
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValueType>({ mode: "onBlur" });
 
-  const [loginError, setLoginError] = useState({});
+  const [emailLoginError, setEmailLoginError] = useState("");
+  const [passwordLoginError, setPasswordLoginError] = useState("");
+
   const onSubmit = (data: FormValueType) => {
-    if (data.email !== "test@codeit.com") {
-      setLoginError({
-        ...loginError,
-        emailLoginErrorMessage: "이메일을 확인해 주세요.",
-        passwordLoginErrorMessage: "비밀번호를 확인해 주세요.",
-      });
+    if (data.email !== "test@codeit.com" && data.password !== "sprint101") {
+      setEmailLoginError("이메일을 확인해 주세요.");
+      setPasswordLoginError("비밀번호를 확인해 주세요.");
+    } else {
+      handleSuccess();
     }
   };
   const handleSuccess = () => {
-    // 원하는 함수 실행
-    console.log("유효성 검사 통과 - 원하는 함수 실행");
+    console.log("로그인 성공");
   };
-  console.log(loginError);
+
   return (
     <>
       <form
@@ -42,10 +40,13 @@ const SignInForm = () => {
         <div className={styles["sign_input_box"]}>
           <label htmlFor='emai'>이메일</label>
           <input
+            onClick={() => setEmailLoginError("")}
             placeholder='이메일을 입력해 주세요.'
             type='email'
             id='email'
-            className={`${errors.email && styles["invalid"]}`}
+            className={`${
+              (errors.email || emailLoginError) && styles["invalid"]
+            }`}
             {...register("email", {
               required: "이메일을 입력해주세요",
               pattern: {
@@ -56,23 +57,27 @@ const SignInForm = () => {
             })}
           />
           <p className={styles["input_error_message"]}>
-            {(errors.email && errors.email?.message) ||
-              loginError?.emailLoginErrorMessage}
+            {(errors.email && errors.email?.message) || emailLoginError}
           </p>
         </div>
         <div className={styles["sign_input_box"]}>
           <label htmlFor='password'>비밀번호</label>
           <input
+            onClick={() => setPasswordLoginError("")}
             placeholder='비밀번호를 입력해 주세요.'
-            className={styles["sign_input"]}
+            className={`${
+              (errors.password || passwordLoginError) && styles["invalid"]
+            }`}
             type='password'
             id='password'
-            {...register("password")}
+            {...register("password", {
+              required: "비밀번호를 입력해 주세요.",
+            })}
           />
         </div>
 
         <p className={styles["input_error_message"]}>
-          {loginError?.passwordLoginErrorMessage}
+          {(errors.password && errors.password?.message) || passwordLoginError}
         </p>
         <button className={styles["submit_button"]}>로그인</button>
       </form>
@@ -89,7 +94,6 @@ const SignInForm = () => {
           </div>
         </div>
       </div>
-      <DevTool control={control} />
     </>
   );
 };
