@@ -2,8 +2,8 @@
 
 import styles from "./SignInForm.module.css";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 interface FormValueType {
   email: string;
   password: string;
@@ -15,9 +15,15 @@ const SignInForm = () => {
     formState: { errors },
   } = useForm<FormValueType>({ mode: "onBlur" });
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      router.push("/folder");
+    }
+  }, []);
   const [emailLoginError, setEmailLoginError] = useState("");
   const [passwordLoginError, setPasswordLoginError] = useState("");
-
+  const router = useRouter();
   const onSubmit = async (data: FormValueType) => {
     try {
       const response = await fetch(
@@ -42,7 +48,7 @@ const SignInForm = () => {
       const json = await response.json();
       const accessToken = json.data.accessToken;
       localStorage.setItem("accessToken", accessToken);
-      console.log(accessToken);
+      router.push("/folder");
     } catch (error) {
       console.log(error);
     }

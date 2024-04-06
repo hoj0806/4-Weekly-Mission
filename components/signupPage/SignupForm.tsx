@@ -83,13 +83,6 @@ const SignUpForm = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          router.push("/folder");
-        }}
-      >
-        이동
-      </button>
       <form
         className={styles["sign_form"]}
         noValidate
