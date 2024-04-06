@@ -1,9 +1,9 @@
 "use client";
 import styles from "./SignupForm.module.css";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-// import { useRouter } from "next/router";
+
 interface FormValueType {
   email: string;
   password: string;
@@ -17,8 +17,14 @@ const SignUpForm = () => {
     formState: { errors },
     getValues,
   } = useForm<FormValueType>({ mode: "onBlur" });
-  const router = useRouter();
 
+  const router = useRouter();
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      router.push("/folder");
+    }
+  }, []);
   const passWordValue = getValues("password");
 
   const validatePasswordConfirm = (value: string): string | undefined => {
@@ -55,7 +61,6 @@ const SignUpForm = () => {
   };
 
   const onSignUp = async (data: FormValueType) => {
-    if (!router) return;
     try {
       const response = await fetch(
         "https://bootcamp-api.codeit.kr/api/sign-up",
@@ -71,9 +76,10 @@ const SignUpForm = () => {
           }),
         }
       );
-      console.log(response);
+      const json = await response.json();
+      const accessToken = json.data.accessToken;
       if (response.ok) {
-        console.log("페이지 이동!");
+        localStorage.setItem("accessToken", accessToken);
         router.push("folder");
       }
     } catch (error) {
