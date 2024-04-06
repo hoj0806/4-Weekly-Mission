@@ -59,8 +59,6 @@ const FolderPageMain = ({
     getFolderData();
   }, []);
 
-  console.log(linkData);
-  console.log(folderData);
   const [folderName, setFolderName] = useState("");
   const [isShowFuncButtonBox, setIsShowFuncButtonBox] = useState(false);
 
