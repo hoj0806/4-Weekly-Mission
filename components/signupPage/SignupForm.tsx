@@ -1,9 +1,11 @@
 "use client";
 import styles from "./SignupForm.module.css";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import InputEyeButton from "../common/InputEyeButton/InputEyeButton";
+import InputEyeConfirmButton from "../common/InputEyeConfirmButton/InputEyeConfirmButton";
 interface FormValueType {
   email: string;
   password: string;
@@ -26,7 +28,10 @@ const SignUpForm = () => {
     }
   }, []);
   const passWordValue = getValues("password");
-
+  const [passwordInputType, setPasswordInputType] =
+    useState<string>("password");
+  const [passwordConfirmInputType, setPasswordComfirmInputType] =
+    useState<string>("password");
   const validatePasswordConfirm = (value: string): string | undefined => {
     if (value !== passWordValue) {
       return "비밀번호가 일치하지 않아요.";
@@ -117,10 +122,11 @@ const SignUpForm = () => {
         </div>
         <div className={styles["sign_input_box"]}>
           <label htmlFor='password'>비밀번호</label>
+          <InputEyeButton setPasswordInputType={setPasswordInputType} />
           <input
             className={`${errors.password && styles["invalid"]}`}
             placeholder='영문, 숫자를 조합해 8자 이상 입력해 주세요.'
-            type='password'
+            type={passwordInputType}
             id='password'
             {...register("password", {
               required: "비밀번호를 입력해주세요",
@@ -140,10 +146,13 @@ const SignUpForm = () => {
         </div>
         <div className={styles["sign_input_box"]}>
           <label htmlFor='passwordConfirm'>비밀번호 확인</label>
+          <InputEyeConfirmButton
+            setPasswordComfirmInputType={setPasswordComfirmInputType}
+          />
           <input
             className={`${errors.passwordConfirm && styles["invalid"]}`}
             placeholder='비밀번호와 일치하는 값을 입력해 주세요.'
-            type='password'
+            type={passwordConfirmInputType}
             id='passwordConfirm'
             {...register("passwordConfirm", {
               required: "비밀번호 확인값을 입력해주세요",

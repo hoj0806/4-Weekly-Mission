@@ -2,9 +2,10 @@
 
 import styles from "./SignInForm.module.css";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import InputEyeButton from "@/components/common/InputEyeButton/InputEyeButton";
 interface FormValueType {
   email: string;
   password: string;
@@ -22,6 +23,10 @@ const SignInForm = () => {
       router.push("/folder");
     }
   }, []);
+
+  const [passwordInputType, setPasswordInputType] =
+    useState<string>("password");
+
   const [emailLoginError, setEmailLoginError] = useState("");
   const [passwordLoginError, setPasswordLoginError] = useState("");
   const router = useRouter();
@@ -64,6 +69,7 @@ const SignInForm = () => {
       >
         <div className={styles["sign_input_box"]}>
           <label htmlFor='emai'>이메일</label>
+
           <input
             onClick={() => setEmailLoginError("")}
             placeholder='이메일을 입력해 주세요.'
@@ -87,13 +93,14 @@ const SignInForm = () => {
         </div>
         <div className={styles["sign_input_box"]}>
           <label htmlFor='password'>비밀번호</label>
+          <InputEyeButton setPasswordInputType={setPasswordInputType} />
           <input
             onClick={() => setPasswordLoginError("")}
             placeholder='비밀번호를 입력해 주세요.'
             className={`${
               (errors.password || passwordLoginError) && styles["invalid"]
             }`}
-            type='password'
+            type={passwordInputType}
             id='password'
             {...register("password", {
               required: "비밀번호를 입력해 주세요.",
