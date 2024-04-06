@@ -4,6 +4,7 @@ import styles from "./SignInForm.module.css";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 interface FormValueType {
   email: string;
   password: string;
@@ -109,12 +110,17 @@ const SignInForm = () => {
         <div className={styles["social_sign_box"]}>
           <div className={styles["social_sign_text_box"]}>소셜 로그인</div>
           <div className={styles["social_sign_icon_box"]}>
-            <button>
-              <img src='/assets/images/social_sign_google_icon.svg' />
-            </button>
-            <button>
-              <img src='/assets/images/social_sign_kakao_icon.svg' />
-            </button>
+            <Link href='https://www.google.com'>
+              <button>
+                <img src='/assets/images/social_sign_google_icon.svg' />
+              </button>
+            </Link>
+
+            <Link href='https://www.kakaocorp.com/page'>
+              <button>
+                <img src='/assets/images/social_sign_kakao_icon.svg' />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

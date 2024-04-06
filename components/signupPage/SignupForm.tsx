@@ -3,7 +3,7 @@ import styles from "./SignupForm.module.css";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 interface FormValueType {
   email: string;
   password: string;
@@ -162,12 +162,17 @@ const SignUpForm = () => {
             다른 방식으로 가입하기
           </div>
           <div className={styles["social_sign_icon_box"]}>
-            <button>
-              <img src='/assets/images/social_sign_google_icon.svg' />
-            </button>
-            <button>
-              <img src='/assets/images/social_sign_kakao_icon.svg' />
-            </button>
+            <Link href='https://www.google.com'>
+              <button>
+                <img src='/assets/images/social_sign_google_icon.svg' />
+              </button>
+            </Link>
+
+            <Link href='https://www.kakaocorp.com/page'>
+              <button>
+                <img src='/assets/images/social_sign_kakao_icon.svg' />
+              </button>
+            </Link>
           </div>
         </div>
       </div>
