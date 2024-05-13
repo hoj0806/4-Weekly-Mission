@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "../styles/global.css";
 
 import { ReactNode } from "react";
-import Provider from "@/util/Provder";
+import Provider from "@/util/Provider";
 export const metadata: Metadata = {
   title: {
     template: "%s | Linkbrary",
