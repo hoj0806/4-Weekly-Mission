@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import "../styles/global.css";
 
 import { ReactNode } from "react";
-
+import Provider from "@/util/Provder";
 export const metadata: Metadata = {
   title: {
     template: "%s | Linkbrary",
@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang='ko'>
-      <body>{children}</body>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 };
