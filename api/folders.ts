@@ -40,4 +40,22 @@ export const addFolder = async (folderName: string) => {
     throw error;
   }
 };
+
+export const deleteFolder = async (folderId: number) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  try {
+    const response = await instance.delete(
+      `https://bootcamp-api.codeit.kr/api/linkbrary/v1/folders/${folderId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.error("error");
+    throw error;
+  }
+};
 axios.defaults.withCredentials = true;

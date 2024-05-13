@@ -165,6 +165,7 @@ const FolderPageMain = ({
         <DeleteFolderModal
           FolderModalValue={FolderModalValue}
           handleDeleteFolderModalClick={handleDeleteFolderModalClick}
+          folderId={folderId}
         />
       )}
       {isShowAddFolderModal && (
