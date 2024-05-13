@@ -1,5 +1,5 @@
 import styles from "./LinkListByFolderId.module.css";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { LinkDataType } from "@/types/LinkDataTypes";
 import FolderPageLinkItem from "../FolderPageLinkItem/FolderPageLinkItem";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +11,7 @@ interface LinkListProps {
   ) => void;
   setSharedUrl: Dispatch<SetStateAction<string>>;
   linkData: LinkDataType | null;
+  params: { folderId: string };
 }
 
 const LinkListByFolderId = ({
@@ -23,9 +24,12 @@ const LinkListByFolderId = ({
     queryKey: ["links"],
     queryFn: () => getLinksByFolderId(params.folderId),
   });
+  const [paramsId, setParamsId] = useState();
 
+  console.log(paramsId);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+
   console.log(data);
   return (
     <div>
@@ -43,6 +47,7 @@ const LinkListByFolderId = ({
                 setSharedUrl={setSharedUrl}
                 date={item.created_at.slice(0, 10)}
                 key={item.id}
+                linkId={item.id}
               />
             );
           })}

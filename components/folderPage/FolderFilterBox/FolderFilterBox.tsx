@@ -65,12 +65,7 @@ const FolderFilterBox = ({
       {data.map(({ name, id }) => {
         return (
           <Link href={`/folder/${id}`} key={id}>
-            <FolderFilterButton
-              name={name}
-              key={id}
-              isActive={activeFilterId === String(id)}
-              handleClick={() => handleClickFilterButton(name, id)}
-            />
+            <div>{name}</div>
           </Link>
         );
       })}

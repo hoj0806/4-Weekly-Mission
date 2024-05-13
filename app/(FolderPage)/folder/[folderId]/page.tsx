@@ -13,18 +13,9 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import AddLinkInFolder from "@/components/folderPage/modal/AddLinkInFolder/AddLinkInFolder";
-const FolderPage = () => {
+const FolderPage = ({ params }: { folderId: string }) => {
   const queryClient = new QueryClient();
-  useEffect(() => {
-    const fetchLinks = async () => {
-      await queryClient.prefetchQuery({
-        queryKey: ["links"],
-        queryFn: getAllLinks,
-      });
-    };
 
-    fetchLinks();
-  }, []);
   const {
     isShowModal: isShowAddLinkInFolderModal,
     handleModalClick: handleAddLinkInFolderModalClick,
@@ -46,6 +37,7 @@ const FolderPage = () => {
             handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
             sharedUrl={sharedUrl}
             setSharedUrl={setSharedUrl}
+            params={params}
           />
         </HydrationBoundary>
       </HeaderFooterLayout>

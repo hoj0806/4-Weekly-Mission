@@ -16,16 +16,6 @@ import {
 export const queryClient = new QueryClient();
 
 const FolderPage = () => {
-  useEffect(() => {
-    const fetchLinks = async () => {
-      await queryClient.prefetchQuery({
-        queryKey: ["links"],
-        queryFn: getAllLinks,
-      });
-    };
-
-    fetchLinks();
-  }, []);
   const {
     isShowModal: isShowAddLinkInFolderModal,
     handleModalClick: handleAddLinkInFolderModalClick,

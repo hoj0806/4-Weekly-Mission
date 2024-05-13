@@ -14,6 +14,7 @@ interface FoldrPageLinkItemProps {
   ) => void;
   setSharedUrl: Dispatch<SetStateAction<string>>;
   date: string;
+  linkId: number;
 }
 
 const FolderPageLinkItem = ({
@@ -24,6 +25,7 @@ const FolderPageLinkItem = ({
   handleAddLinkInFolderModalClick,
   setSharedUrl,
   date,
+  linkId,
 }: FoldrPageLinkItemProps) => {
   const {
     isShowModal: isShowKebabModal,
@@ -87,6 +89,7 @@ const FolderPageLinkItem = ({
         <DeleteLinkModal
           url={url}
           handleDeleteLinkModalClick={handleDeleteLinkModalClick}
+          linkId={linkId}
         />
       )}
     </>

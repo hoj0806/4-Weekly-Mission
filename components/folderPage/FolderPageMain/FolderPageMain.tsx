@@ -18,7 +18,6 @@ import ShowSearchData from "../ShowSearchData/ShowSearchData";
 import { useQuery } from "@tanstack/react-query";
 import { getAllLinks } from "@/api/folder";
 import { getUserInfo } from "@/api/user";
-
 interface FolderPageMainProps {
   isShowAddLinkInFolderModal: boolean;
   handleAddLinkInFolderModalClick: (
@@ -33,18 +32,12 @@ const FolderPageMain = ({
   handleAddLinkInFolderModalClick,
   sharedUrl,
   setSharedUrl,
+  params,
 }: FolderPageMainProps) => {
-  const { data } = useQuery({
-    queryKey: ["links"],
-    queryFn: getAllLinks,
-  });
-
   const { data: userData } = useQuery({
     queryKey: ["user"],
     queryFn: getUserInfo,
   });
-
-  console.log(data);
 
   const [linkData, setLinkData] = useState<LinkDataType | null>(null);
   const [folderId, setFolderId] = useState("");
@@ -122,6 +115,7 @@ const FolderPageMain = ({
           handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
           setSharedUrl={setSharedUrl}
           linkData={linkData}
+          params={params}
         />
       </div>
 
