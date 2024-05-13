@@ -23,7 +23,6 @@ const FolderPage = ({ params }: { folderId: string }) => {
 
   const [sharedUrl, setSharedUrl] = useState("");
 
-  console.log(window.location.href.replaceAll("folder", "shared"));
   return (
     <>
       <title>Folder | Linkbrary</title>

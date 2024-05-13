@@ -138,6 +138,7 @@ const FolderPageMain = ({
           handleShareFolderModalClick={handleShareFolderModalClick}
           FolderModalValue={FolderModalValue}
           ShareUrlFolderId={ShareUrlFolderId}
+          folderId={folderId}
         />
       )}
       {isShowRenameFolderModal && (
