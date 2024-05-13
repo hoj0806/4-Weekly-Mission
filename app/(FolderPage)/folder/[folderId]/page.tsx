@@ -12,10 +12,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-
-export const queryClient = new QueryClient();
-
 const FolderPage = () => {
+  const queryClient = new QueryClient();
   useEffect(() => {
     const fetchLinks = async () => {
       await queryClient.prefetchQuery({

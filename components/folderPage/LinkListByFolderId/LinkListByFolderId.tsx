@@ -1,9 +1,10 @@
-import styles from "./LinkList.module.css";
+import styles from "./LinkListByFolderId.module.css";
 import { Dispatch, SetStateAction } from "react";
 import { LinkDataType } from "@/types/LinkDataTypes";
 import FolderPageLinkItem from "../FolderPageLinkItem/FolderPageLinkItem";
 import { useQuery } from "@tanstack/react-query";
 import { getAllLinks } from "@/api/folder";
+import { getLinksByFolderId } from "@/api/links";
 interface LinkListProps {
   handleAddLinkInFolderModalClick: (
     e: React.MouseEvent<HTMLImageElement | HTMLButtonElement>
@@ -12,15 +13,15 @@ interface LinkListProps {
   linkData: LinkDataType | null;
 }
 
-const LinkList = ({
+const LinkListByFolderId = ({
   handleAddLinkInFolderModalClick,
   setSharedUrl,
   linkData,
+  params,
 }: LinkListProps) => {
-  
   const { data, isLoading, error } = useQuery({
     queryKey: ["links"],
-    queryFn: () => getAllLinks(),
+    queryFn: () => getLinksByFolderId(params.folderId),
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -51,4 +52,4 @@ const LinkList = ({
   );
 };
 
-export default LinkList;
+export default LinkListByFolderId;

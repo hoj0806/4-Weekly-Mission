@@ -1,4 +1,3 @@
-import styles from "./SharePageFolderList.module.css";
 import { getSharedPageFolderData } from "@/api/sharedPageFolderData";
 import SharePageFolderItem from "../SharPageFolderItem/SharePageFolderItem";
 

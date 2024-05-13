@@ -52,7 +52,6 @@ const SignInForm = () => {
         return;
       }
       const json = await response.json();
-      console.log(json);
       const accessToken = json.accessToken;
       localStorage.setItem("accessToken", accessToken);
       router.push("/folder");

@@ -1,6 +1,6 @@
 "use client";
 import styles from "./FolderPageMain.module.css";
-import LinkList from "../LinkList/LinkList";
+import LinkListByFolderId from "../LinkListByFolderId/LinkListByFolderId";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import LinkSearchInput from "@/components/common/LinkSearchInput/LinkSearchInput";
 import useModal from "@/hooks/useModal";
@@ -15,6 +15,9 @@ import AddLinkInFolder from "../modal/AddLinkInFolder/AddLinkInFolder";
 import ShareFolderModal from "../modal/ShareFolderModal/ShareFolderModal";
 import LinkFuncButtonBox from "../LinkFuncButtonBox/LinkFuncButtonBox";
 import ShowSearchData from "../ShowSearchData/ShowSearchData";
+import { useQuery } from "@tanstack/react-query";
+import { getAllLinks } from "@/api/folder";
+import { getUserInfo } from "@/api/user";
 
 interface FolderPageMainProps {
   isShowAddLinkInFolderModal: boolean;
@@ -31,6 +34,18 @@ const FolderPageMain = ({
   sharedUrl,
   setSharedUrl,
 }: FolderPageMainProps) => {
+  const { data } = useQuery({
+    queryKey: ["links"],
+    queryFn: getAllLinks,
+  });
+
+  const { data: userData } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUserInfo,
+  });
+
+  console.log(data);
+
   const [linkData, setLinkData] = useState<LinkDataType | null>(null);
   const [folderId, setFolderId] = useState("");
 
@@ -126,7 +141,7 @@ const FolderPageMain = ({
             />
           )}
         </div>
-        <LinkList
+        <LinkListByFolderId
           handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
           setSharedUrl={setSharedUrl}
           linkData={linkData}
