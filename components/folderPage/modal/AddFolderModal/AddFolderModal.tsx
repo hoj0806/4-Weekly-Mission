@@ -21,7 +21,7 @@ const AddFolderModal = ({
   const onChangeFolderNameInput = (e) => {
     setAddFolderName(e.target.value);
   };
-  const handleAddModalClick = () => {
+  const handleAddButton = () => {
     addFolderByName.mutate(addFolderName, {});
     handleAddFolderModalClick();
   };
@@ -43,9 +43,7 @@ const AddFolderModal = ({
             onClick={handleAddFolderModalClick}
           />
         </div>
-        <ModalButton handleAddModalClick={handleAddModalClick}>
-          추가하기
-        </ModalButton>
+        <ModalButton handleAddButton={handleAddButton}>추가하기</ModalButton>
       </div>
     </ModalWrapper>
   );

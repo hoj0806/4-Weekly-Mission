@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllFolders } from "@/api/folders";
 import { useState } from "react";
 import { addLinkInFolder } from "@/api/links";
+import { useRouter } from "next/navigation";
 interface isShowAddLinkInFolderProps {
   handleAddLinkInFolderModalClick: (
     e: React.MouseEvent<HTMLImageElement | HTMLButtonElement>
@@ -23,15 +24,19 @@ const AddLinkInFolder = ({
     queryFn: getAllFolders,
   });
   const queryClient = useQueryClient();
-  const [selectFolder, setSelectFolder] = useState("");
+
   const [selectFolderId, setSelectFolderId] = useState();
 
+  const router = useRouter();
+
+  
   const addLink = useMutation({
     mutationFn: ([url, folderId]: [string, number]) =>
       addLinkInFolder(url, folderId),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["links"] });
+      router.push(`${selectFolderId}`);
     },
   });
 
@@ -59,7 +64,7 @@ const AddLinkInFolder = ({
               <li
                 key={i}
                 className={
-                  name === selectFolder
+                  id === selectFolderId
                     ? styles["list-item-wrapper-active"]
                     : styles["list-item-wrapper"]
                 }

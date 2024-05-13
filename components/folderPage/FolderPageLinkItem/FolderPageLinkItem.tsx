@@ -3,7 +3,9 @@ import * as functions from "@/functions/formatTimeAgo";
 import KebabModal from "../modal/KebabModal/KebabModal";
 import useModal from "@/hooks/useModal";
 import DeleteLinkModal from "../modal/DeleteLinkModal/DeleteLinkModal";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { favoriteLink } from "@/api/links";
 interface FoldrPageLinkItemProps {
   description: string;
   image_source: string;
@@ -15,6 +17,7 @@ interface FoldrPageLinkItemProps {
   setSharedUrl: Dispatch<SetStateAction<string>>;
   date: string;
   linkId: number;
+  favorite: boolean;
 }
 
 const FolderPageLinkItem = ({
@@ -26,17 +29,33 @@ const FolderPageLinkItem = ({
   setSharedUrl,
   date,
   linkId,
+  favorite,
 }: FoldrPageLinkItemProps) => {
   const {
     isShowModal: isShowKebabModal,
     handleModalClick: handleClickKebabModal,
   } = useModal(false);
 
+  const queryClient = useQueryClient();
   const {
     isShowModal: isShowDeleteLinkModal,
     handleModalClick: handleDeleteLinkModalClick,
   } = useModal(false);
 
+  const makeFavortie = useMutation({
+    mutationFn: ([linkId, favortieBoolean]: [number, boolean]) => {
+      favoriteLink(linkId, favortieBoolean);
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["links"] });
+    },
+  });
+
+  const handleStarIcon = () => {
+    console.log(linkId);
+    makeFavortie.mutate([linkId, !favorite]);
+  };
   return (
     <>
       <div className={styles.item_card_wrapper}>
@@ -57,11 +76,22 @@ const FolderPageLinkItem = ({
             )}
           </div>
         </a>
-        <img
-          src='/assets/images/item_card_star_icon.svg'
-          className={styles.item_card_star_icon}
-          alt='card_star_icon'
-        />
+        {favorite === true ? (
+          <img
+            src='/assets/images/favortie_link.svg'
+            className={styles.item_card_star_icon}
+            alt='card_star_icon'
+            onClick={handleStarIcon}
+          />
+        ) : (
+          <img
+            src='/assets/images/item_card_star_icon.svg'
+            className={styles.item_card_star_icon}
+            alt='card_star_icon'
+            onClick={handleStarIcon}
+          />
+        )}
+
         <div className={styles.item_card_text_box}>
           <div className={styles.item_card_createdAt}>
             {functions.formatTimeAgo(created_at)}

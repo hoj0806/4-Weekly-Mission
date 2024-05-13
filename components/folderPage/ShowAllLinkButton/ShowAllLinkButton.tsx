@@ -1,27 +1,22 @@
 import styles from "./ShowAllLinksButton.module.css";
 interface ShowAllLinksButtonProps {
   name: string;
-  activeFilterId: string;
-  handleClick: () => void;
 }
 
 const ShowAllLinksButton = ({
-  name,
-  activeFilterId,
-  handleClick
+  handleClick,
+  isActive,
 }: ShowAllLinksButtonProps) => {
-  const isFilterShowAll = activeFilterId === "showAll";
-
   return (
     <button
       className={styles.filter_button}
       onClick={handleClick}
       style={{
-        backgroundColor: isFilterShowAll ? "#6d6afe" : "#fff",
-        color: isFilterShowAll ? "#fff" : "#000",
+        backgroundColor: isActive ? "#6d6afe" : "#fff",
+        color: isActive ? "#fff" : "#000",
       }}
     >
-      {name}
+      전체
     </button>
   );
 };

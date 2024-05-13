@@ -62,4 +62,28 @@ export const deleteLink = async (linkId: number) => {
     throw error;
   }
 };
+
+export const favoriteLink = async (
+  linkId: number,
+  favortieBoolean: boolean
+) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  try {
+    const response = await instance.put(
+      `https://bootcamp-api.codeit.kr/api/linkbrary/v1/links/${linkId}`,
+      {
+        favorite: favortieBoolean,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("error");
+  }
+};
 axios.defaults.withCredentials = true;

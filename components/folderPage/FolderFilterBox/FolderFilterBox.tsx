@@ -16,9 +16,6 @@ interface FolderFilterBoxProps {
 }
 
 const FolderFilterBox = ({
-  folderData,
-  setFolderName,
-  setFolderId,
   setIsShowFuncButtonBox,
   setFolderModalValue,
   setShareUrlFolderId,
@@ -39,33 +36,35 @@ const FolderFilterBox = ({
 
   const handleClickFilterButton = (folderName: string, folderId: number) => {
     setIsShowFuncButtonBox(true);
-    setFolderName(folderName);
-    setFolderId("?folderId=" + String(folderId));
     setActiveFilterId(folderId.toString());
     setFolderModalValue(folderName);
     setShareUrlFolderId(folderId.toString());
   };
 
   const handleClickShowAllLinksButton = () => {
-    setFolderName("전체");
     setIsShowFuncButtonBox(false);
-    setFolderId("");
+
     setActiveFilterId("showAll");
   };
   return (
     <div className={styles.link_filter_box}>
       <Link href='/folder'>
         <ShowAllLinksButton
-          name='전체'
+          isActive={params?.folderId === undefined}
           activeFilterId={activeFilterId}
           handleClick={() => handleClickShowAllLinksButton()}
         />
       </Link>
 
-      {data.map(({ name, id }) => {
+      {data.map(({ name, id }, index) => {
         return (
           <Link href={`/folder/${id}`} key={id}>
-            <div>{name}</div>
+            <FolderFilterButton
+              name={name}
+              key={id}
+              isActive={params?.folderId === String(id)}
+              handleClick={() => handleClickFilterButton(name, id)}
+            />
           </Link>
         );
       })}

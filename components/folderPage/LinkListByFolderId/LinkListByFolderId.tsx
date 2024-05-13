@@ -24,21 +24,21 @@ const LinkListByFolderId = ({
     queryKey: ["links"],
     queryFn: () => getLinksByFolderId(params.folderId),
   });
+
   const [paramsId, setParamsId] = useState();
 
-  console.log(paramsId);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   console.log(data);
   return (
     <div>
-      {linkData?.data.length === 0 ? (
-        <div className={styles.no_link_wrapper}>저장된 링크가 없습니다</div>
-      ) : (
-        <div className={styles.item_card_grid}>
-          {data.map((item) => {
-            return (
+      <>
+        {data.length === 0 ? (
+          <div className={styles.no_link_wrapper}>저장된 링크가 없습니다</div>
+        ) : (
+          <div className={styles.item_card_grid}>
+            {data.map((item) => (
               <FolderPageLinkItem
                 {...item}
                 handleAddLinkInFolderModalClick={
@@ -49,10 +49,10 @@ const LinkListByFolderId = ({
                 key={item.id}
                 linkId={item.id}
               />
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </>
     </div>
   );
 };

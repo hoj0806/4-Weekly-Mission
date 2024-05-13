@@ -1,7 +1,7 @@
 "use client";
 import styles from "./FolderPageMain.module.css";
 import LinkListByFolderId from "../LinkListByFolderId/LinkListByFolderId";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import LinkSearchInput from "@/components/common/LinkSearchInput/LinkSearchInput";
 import useModal from "@/hooks/useModal";
 import { LinkDataType } from "@/types/LinkDataTypes";
@@ -18,6 +18,7 @@ import ShowSearchData from "../ShowSearchData/ShowSearchData";
 import { useQuery } from "@tanstack/react-query";
 import { getAllLinks } from "@/api/folder";
 import { getUserInfo } from "@/api/user";
+import LinkList from "../LinkList/LinkList";
 interface FolderPageMainProps {
   isShowAddLinkInFolderModal: boolean;
   handleAddLinkInFolderModalClick: (
@@ -38,9 +39,14 @@ const FolderPageMain = ({
     queryKey: ["user"],
     queryFn: getUserInfo,
   });
-
-  const [linkData, setLinkData] = useState<LinkDataType | null>(null);
   const [folderId, setFolderId] = useState("");
+
+  useEffect(() => {
+    params !== undefined ? setFolderId(params.folderId) : setFolderId("전체");
+  }, []);
+
+  console.log(folderId);
+  const [linkData, setLinkData] = useState<LinkDataType | null>(null);
 
   const [folderData, setFolderData] = useState<FolderDataType | null>(null);
 
@@ -92,10 +98,10 @@ const FolderPageMain = ({
           <FolderFilterBox
             setFolderName={setFolderName}
             setIsShowFuncButtonBox={setIsShowFuncButtonBox}
-            setFolderId={setFolderId}
             setFolderModalValue={setFolderModalValue}
             setShareUrlFolderId={setShareUrlFolderId}
             folderData={folderData}
+            params={params}
           />
           <AddFolderButton
             handleAddFolderModalClick={handleAddFolderModalClick}
@@ -103,7 +109,7 @@ const FolderPageMain = ({
         </div>
         <div className={styles.folder_title_box}>
           <h1 className={styles.folder_title}>{folderName}</h1>
-          {isShowFuncButtonBox && (
+          {params && (
             <LinkFuncButtonBox
               handleRenameFolderModalClick={handleRenameFolderModalClick}
               handleDeleteFolderModalClick={handleDeleteFolderModalClick}
@@ -111,12 +117,20 @@ const FolderPageMain = ({
             />
           )}
         </div>
-        <LinkListByFolderId
-          handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
-          setSharedUrl={setSharedUrl}
-          linkData={linkData}
-          params={params}
-        />
+        {folderId === "전체" ? (
+          <LinkList
+            handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+            setSharedUrl={setSharedUrl}
+            linkData={linkData}
+          />
+        ) : (
+          <LinkListByFolderId
+            handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+            setSharedUrl={setSharedUrl}
+            linkData={linkData}
+            params={params}
+          />
+        )}
       </div>
 
       {isShowShareFolderModal && (
@@ -130,6 +144,7 @@ const FolderPageMain = ({
         <RenameFolderNameModal
           handleRenameFolderModalClick={handleRenameFolderModalClick}
           FolderModalValue={FolderModalValue}
+          folderId={folderId}
         />
       )}
       {isShowDeleteFolderModal && (
