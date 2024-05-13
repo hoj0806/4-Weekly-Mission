@@ -45,7 +45,7 @@ const SignUpForm = () => {
   ): Promise<string | undefined> => {
     try {
       const response = await fetch(
-        "https://bootcamp-api.codeit.kr/api/check-email",
+        "https://bootcamp-api.codeit.kr/api/linkbrary/v1/users/check-email",
         {
           method: "POST",
           headers: {
