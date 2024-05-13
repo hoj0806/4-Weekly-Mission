@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { LinkDataType } from "@/types/LinkDataTypes";
 import FolderPageLinkItem from "../FolderPageLinkItem/FolderPageLinkItem";
 import { useQuery } from "@tanstack/react-query";
-import { getAllLinks } from "@/api/folder";
 import { getLinksByFolderId } from "@/api/links";
+
 interface LinkListProps {
   handleAddLinkInFolderModalClick: (
     e: React.MouseEvent<HTMLImageElement | HTMLButtonElement>
@@ -24,21 +24,25 @@ const LinkListByFolderId = ({
     queryKey: ["links"],
     queryFn: () => getLinksByFolderId(params.folderId),
   });
+  const [linkDatas, setLinkData] = useState<LinkDataType[] | undefined>();
 
-  const [paramsId, setParamsId] = useState();
+  useEffect(() => {
+    if (data) {
+      setLinkData(data);
+    }
+  }, [data]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(data);
   return (
     <div>
-      <>
-        {data.length === 0 ? (
-          <div className={styles.no_link_wrapper}>저장된 링크가 없습니다</div>
-        ) : (
-          <div className={styles.item_card_grid}>
-            {data.map((item) => (
+      {linkDatas && linkDatas.length === 0 ? (
+        <div className={styles.no_link_wrapper}>저장된 링크가 없습니다</div>
+      ) : (
+        <div className={styles.item_card_grid}>
+          {linkDatas &&
+            linkDatas.map((item) => (
               <FolderPageLinkItem
                 {...item}
                 handleAddLinkInFolderModalClick={
@@ -50,9 +54,8 @@ const LinkListByFolderId = ({
                 linkId={item.id}
               />
             ))}
-          </div>
-        )}
-      </>
+        </div>
+      )}
     </div>
   );
 };

@@ -13,16 +13,16 @@ function SharePageFolderItem({
   createdAt,
   url,
   title,
-  imageSource,
+  image_source,
   date,
 }: FolderDataType) {
   return (
     <a href={url} className={styles.folder_link}>
       <div className={styles.folder_item_box}>
-        {imageSource ? (
+        {image_source ? (
           <div className={styles.folder_image_box}>
             <img
-              src={imageSource}
+              src={image_source}
               className={styles.folder_image}
               alt='folder_image'
             />

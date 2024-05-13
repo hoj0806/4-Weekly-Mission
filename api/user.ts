@@ -14,7 +14,7 @@ export const getUserInfo = async () => {
         },
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error fetching links:", error);
     throw error;

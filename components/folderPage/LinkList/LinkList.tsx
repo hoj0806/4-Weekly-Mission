@@ -17,7 +17,6 @@ const LinkList = ({
   setSharedUrl,
   linkData,
 }: LinkListProps) => {
-  
   const { data, isLoading, error } = useQuery({
     queryKey: ["links"],
     queryFn: () => getAllLinks(),
@@ -26,6 +25,7 @@ const LinkList = ({
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   console.log(data);
+  console.log("전체 데이터입니다");
   return (
     <div>
       {linkData?.data.length === 0 ? (
@@ -42,6 +42,7 @@ const LinkList = ({
                 setSharedUrl={setSharedUrl}
                 date={item.created_at.slice(0, 10)}
                 key={item.id}
+                linkId={item.id}
               />
             );
           })}

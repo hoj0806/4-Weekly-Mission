@@ -24,6 +24,7 @@
 .profile-name {
   font-family: var(--Pretendard-Regular);
   line-height: 1.6rem;
+  font-size: 2rem;
 }
 
 .folder-name {

@@ -22,6 +22,8 @@ const FolderPage = ({ params }: { folderId: string }) => {
   } = useModal(false);
 
   const [sharedUrl, setSharedUrl] = useState("");
+
+  console.log(window.location.href.replaceAll("folder", "shared"));
   return (
     <>
       <title>Folder | Linkbrary</title>
