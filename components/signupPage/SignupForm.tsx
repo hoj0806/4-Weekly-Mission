@@ -68,7 +68,7 @@ const SignUpForm = () => {
   const onSignUp = async (data: FormValueType) => {
     try {
       const response = await fetch(
-        "https://bootcamp-api.codeit.kr/api/sign-up",
+        "https://bootcamp-api.codeit.kr/api/linkbrary/v1/auth/sign-up",
         {
           method: "POST",
           headers: {
@@ -82,7 +82,7 @@ const SignUpForm = () => {
         }
       );
       const json = await response.json();
-      const accessToken = json.data.accessToken;
+      const accessToken = json.accessToken;
       if (response.ok) {
         localStorage.setItem("accessToken", accessToken);
         router.push("folder");

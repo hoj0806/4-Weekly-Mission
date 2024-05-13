@@ -3,10 +3,10 @@ import { childrenProps } from "../ModalWrapper/ModalWrapper";
 export default function ModalButton({
   children,
 
-  handleAddButton,
+  handleAddModalClick,
 }: childrenProps) {
   return (
-    <button className={styles["modal-button"]} onClick={handleAddButton}>
+    <button className={styles["modal-button"]} onClick={handleAddModalClick}>
       {children}
     </button>
   );
