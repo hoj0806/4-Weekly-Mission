@@ -2,12 +2,12 @@ import styles from "./SharedPageMain.module.css";
 import LinkSearchInput from "@/components/common/LinkSearchInput/LinkSearchInput";
 import SharePageFolderList from "../SharePageFolderList/SharePageLinkList";
 
-const SharedPageMain = () => {
+const SharedPageMain = ({ params }) => {
   return (
     <div className={styles.main_wrapper}>
       {/* <LinkSearchInput
        /> */}
-      <SharePageFolderList />
+      <SharePageFolderList params={params} />
     </div>
   );
 };

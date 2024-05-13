@@ -2,6 +2,10 @@ import styles from "./AddLinkInFolder.module.css";
 import ModalButton from "../ModalButton/ModalButton";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import { FolderDataType } from "@/types/FolderDataTypes";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAllFolders } from "@/api/folders";
+import { useState } from "react";
+import { addLinkInFolder } from "@/api/links";
 interface isShowAddLinkInFolderProps {
   handleAddLinkInFolderModalClick: (
     e: React.MouseEvent<HTMLImageElement | HTMLButtonElement>
@@ -9,12 +13,33 @@ interface isShowAddLinkInFolderProps {
   folderData: FolderDataType | null;
   sharedUrl: string;
 }
-
 const AddLinkInFolder = ({
   handleAddLinkInFolderModalClick,
-  folderData,
+
   sharedUrl,
 }: isShowAddLinkInFolderProps) => {
+  const { data } = useQuery({
+    queryKey: ["folders"],
+    queryFn: getAllFolders,
+  });
+  const queryClient = useQueryClient();
+  const [selectFolder, setSelectFolder] = useState("");
+  const [selectFolderId, setSelectFolderId] = useState();
+
+  const addLink = useMutation({
+    mutationFn: ([url, folderId]: [string, number]) =>
+      addLinkInFolder(url, folderId),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["links"] });
+    },
+  });
+
+  console.log(selectFolderId);
+  const handleAddButton = () => {
+    addLink.mutate([sharedUrl, selectFolderId]);
+    handleAddLinkInFolderModalClick();
+  };
   return (
     <ModalWrapper>
       <div className={styles["modal-wrapper"]}>
@@ -29,22 +54,32 @@ const AddLinkInFolder = ({
           />
         </div>
         <ul className={styles["folder-list"]}>
-          {folderData?.data.map(({ name, link }, i) => {
+          {data.map(({ name, link_count, id }, i) => {
             return (
-              <li key={i} className={styles["list-item-wrapper"]}>
+              <li
+                key={i}
+                className={
+                  name === selectFolder
+                    ? styles["list-item-wrapper-active"]
+                    : styles["list-item-wrapper"]
+                }
+                onClick={() => {
+                  setSelectFolderId(id);
+                }}
+              >
                 <p className={styles["folder-name"]}>{name}</p>
                 <p className={styles["link-count"]}>
-                  {link.count === 0 ? (
+                  {data.count === 0 ? (
                     <div>링크가 없습니다</div>
                   ) : (
-                    <div>{`${link.count}개 링크`}</div>
+                    <div>{`${link_count}개 링크`}</div>
                   )}
                 </p>
               </li>
             );
           })}
         </ul>
-        <ModalButton>추가하기</ModalButton>
+        <ModalButton handleAddButton={handleAddButton}>추가하기</ModalButton>
       </div>
     </ModalWrapper>
   );

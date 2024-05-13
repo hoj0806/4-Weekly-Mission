@@ -89,6 +89,14 @@
   align-items: center;
 }
 
+.list-item-wrapper-active {
+  display: flex;
+  gap: 0.8rem;
+  background: var(--Linkbrary-bg, #f0f6ff);
+  border-radius: 0.8rem;
+  align-items: center;
+}
+
 .link-count {
   color: #9fa6b2;
   font-family: var(--Pretendard-Regular);

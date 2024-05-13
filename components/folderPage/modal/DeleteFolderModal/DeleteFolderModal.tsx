@@ -15,6 +15,7 @@ const DeleteFolderModal = ({
 }: DeleteFolderModalProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  
   const deleteFolderById = useMutation({
     mutationFn: deleteFolder,
     onSuccess: () => {

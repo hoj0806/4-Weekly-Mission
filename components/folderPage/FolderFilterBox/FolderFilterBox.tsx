@@ -1,4 +1,4 @@
-import { SetStateAction, useState, Dispatch } from "react";
+import { SetStateAction, useState, Dispatch, useEffect } from "react";
 import styles from "./FolderFilterBox.module.css";
 import FolderFilterButton from "../FolderFilterButton/FolderFilterButton";
 import ShowAllLinksButton from "../ShowAllLinkButton/ShowAllLinkButton";
@@ -22,8 +22,9 @@ const FolderFilterBox = ({
   setIsShowFuncButtonBox,
   setFolderModalValue,
   setShareUrlFolderId,
+  params,
 }: FolderFilterBoxProps) => {
-  const [activeFilterId, setActiveFilterId] = useState("showAll");
+  const [activeFilterId, setActiveFilterId] = useState("");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["folders"],
@@ -35,6 +36,7 @@ const FolderFilterBox = ({
   }
 
   if (error) return <div>{error.message}</div>;
+
   const handleClickFilterButton = (folderName: string, folderId: number) => {
     setIsShowFuncButtonBox(true);
     setFolderName(folderName);

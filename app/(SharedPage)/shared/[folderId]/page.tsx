@@ -6,8 +6,13 @@ export const metadata = {
   title: "Shared",
 };
 
-const SharedPage = async ({ params }: { folderId: number }) => {
-  return <div>{params.folderId}</div>;
+const SharedPage = async ({ params }: { folderId: string }) => {
+  return (
+    <HeaderFooterLayout>
+      <Profile />
+      <SharedPageMain params={params} />
+    </HeaderFooterLayout>
+  );
 };
 
 export default SharedPage;

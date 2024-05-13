@@ -3,9 +3,7 @@ import { getUserData } from "@/api/userData";
 import NavLoginButton from "../NavLoginButton/NavLoginButton";
 import Link from "next/link";
 import Image from "next/image";
-const Navigation = async () => {
-  const userData = await getUserData();
-
+const Navigation = () => {
   return (
     <div className={styles["nav-wrapper"]}>
       <div className={styles["nav-inside-wrapper"]}>

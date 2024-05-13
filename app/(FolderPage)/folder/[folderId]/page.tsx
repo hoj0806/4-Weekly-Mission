@@ -12,6 +12,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import AddLinkInFolder from "@/components/folderPage/modal/AddLinkInFolder/AddLinkInFolder";
 const FolderPage = () => {
   const queryClient = new QueryClient();
   useEffect(() => {

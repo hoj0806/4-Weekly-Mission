@@ -1,7 +1,7 @@
 "use client";
 import styles from "./FolderPageMain.module.css";
 import LinkListByFolderId from "../LinkListByFolderId/LinkListByFolderId";
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import LinkSearchInput from "@/components/common/LinkSearchInput/LinkSearchInput";
 import useModal from "@/hooks/useModal";
 import { LinkDataType } from "@/types/LinkDataTypes";
@@ -50,29 +50,6 @@ const FolderPageMain = ({
   const [folderId, setFolderId] = useState("");
 
   const [folderData, setFolderData] = useState<FolderDataType | null>(null);
-  const getLinkData = async () => {
-    const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/users/3/links${folderId}`
-    );
-    const json: LinkDataType = await response.json();
-    setLinkData(json);
-  };
-
-  const getFolderData = async () => {
-    const response = await fetch(
-      "https://bootcamp-api.codeit.kr/api/users/3/folders"
-    );
-    const json: FolderDataType = await response.json();
-    setFolderData(json);
-  };
-
-  useEffect(() => {
-    getLinkData();
-  }, [folderId]);
-
-  useEffect(() => {
-    getFolderData();
-  }, []);
 
   const [folderName, setFolderName] = useState("");
   const [isShowFuncButtonBox, setIsShowFuncButtonBox] = useState(false);
