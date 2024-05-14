@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getLinksByFolderId } from "@/api/links";
 import { getAllFolders } from "@/api/folders";
 import SharePageFolderItem from "../SharPageFolderItem/SharePageFolderItem";
-const SharePageFolderList = ({ params }: { folderId: string }) => {
+const SharePageFolderList = ({ params }: any) => {
   console.log(params);
 
   const { data, isLoading, error } = useQuery({

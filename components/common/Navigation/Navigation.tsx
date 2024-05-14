@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Navigation.module.css";
 
 import NavLoginButton from "../NavLoginButton/NavLoginButton";
@@ -11,9 +13,8 @@ const Navigation = () => {
     queryFn: () => getUserInfo(),
   });
 
-
   const accessToken = localStorage.getItem("accessToken");
-  
+
   return (
     <div className={styles["nav-wrapper"]}>
       <div className={styles["nav-inside-wrapper"]}>
