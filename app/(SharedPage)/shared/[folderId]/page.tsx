@@ -12,9 +12,10 @@ import {
 export const metadata = {
   title: "Shared",
 };
-export const queryClient = new QueryClient();
 
-const SharedPage = async ({ params }: { folderId: string }) => {
+const SharedPage = async ({ params }) => {
+  const queryClient = new QueryClient();
+
   return (
     <HeaderFooterLayout>
       <HydrationBoundary state={dehydrate(queryClient)}>

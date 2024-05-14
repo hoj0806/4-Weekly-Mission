@@ -12,6 +12,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 const FolderPage = ({ params }) => {
+  
   const queryClient = new QueryClient();
 
   const {
