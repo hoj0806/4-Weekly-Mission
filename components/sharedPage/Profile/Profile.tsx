@@ -4,7 +4,7 @@ import styles from "./Profile.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "@/api/user";
 import { getFolderById } from "@/api/folders";
-const Profile = ({ params }: { folderId: number }) => {
+const Profile = ({ params }: any) => {
   const { data } = useQuery({
     queryKey: ["users"],
     queryFn: () => getUserInfo(),

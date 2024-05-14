@@ -26,7 +26,7 @@ interface FolderPageMainProps {
   ) => void;
   sharedUrl: string;
   setSharedUrl: Dispatch<SetStateAction<string>>;
-  params: { folderId: string };
+  params: any;
 }
 
 const FolderPageMain = ({
@@ -46,6 +46,7 @@ const FolderPageMain = ({
     params !== undefined ? setFolderId(params.folderId) : setFolderId("전체");
   }, []);
 
+  console.log(folderId);
   const [linkData, setLinkData] = useState<LinkDataType | null>(null);
 
   const [folderData, setFolderData] = useState<FolderDataType | null>(null);
@@ -138,7 +139,6 @@ const FolderPageMain = ({
           handleShareFolderModalClick={handleShareFolderModalClick}
           FolderModalValue={FolderModalValue}
           ShareUrlFolderId={ShareUrlFolderId}
-          folderId={folderId}
         />
       )}
       {isShowRenameFolderModal && (

@@ -11,7 +11,7 @@ interface LinkListProps {
   ) => void;
   setSharedUrl: Dispatch<SetStateAction<string>>;
   linkData: LinkDataType | null;
-  params: { folderId: string };
+  params: any;
 }
 
 const LinkListByFolderId = ({

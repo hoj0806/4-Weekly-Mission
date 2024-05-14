@@ -15,7 +15,7 @@ import { useParams } from "next/navigation";
 const FolderPage = () => {
   const params = useParams();
   const queryClient = new QueryClient();
-  console.log(params);
+
   const {
     isShowModal: isShowAddLinkInFolderModal,
     handleModalClick: handleAddLinkInFolderModalClick,

@@ -13,6 +13,7 @@ interface FolderFilterBoxProps {
   setIsShowFuncButtonBox: Dispatch<SetStateAction<boolean>>;
   setFolderModalValue: Dispatch<SetStateAction<string>>;
   setShareUrlFolderId: Dispatch<SetStateAction<string>>;
+  params: any;
 }
 
 const FolderFilterBox = ({
