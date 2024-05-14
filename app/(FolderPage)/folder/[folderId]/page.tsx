@@ -5,15 +5,13 @@ import { useState } from "react";
 import AddLink from "@/components/folderPage/AddLink/AddLink";
 import FolderPageMain from "@/components/folderPage/FolderPageMain/FolderPageMain";
 import HeaderFooterLayout from "@/app/headerFooterLayout";
-import { getAllLinks } from "@/api/folder";
-import { useEffect } from "react";
+
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import AddLinkInFolder from "@/components/folderPage/modal/AddLinkInFolder/AddLinkInFolder";
-const FolderPage = ({ params }: { folderId: string }) => {
+const FolderPage = ({ params }) => {
   const queryClient = new QueryClient();
 
   const {
