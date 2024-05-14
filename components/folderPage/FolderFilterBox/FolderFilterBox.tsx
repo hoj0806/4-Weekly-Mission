@@ -1,9 +1,11 @@
-import { SetStateAction, useState, Dispatch } from "react";
+import { SetStateAction, useState, Dispatch, useEffect } from "react";
 import styles from "./FolderFilterBox.module.css";
 import FolderFilterButton from "../FolderFilterButton/FolderFilterButton";
 import ShowAllLinksButton from "../ShowAllLinkButton/ShowAllLinkButton";
 import { FolderDataType } from "@/types/FolderDataTypes";
-
+import { useQuery } from "@tanstack/react-query";
+import { getAllFolders } from "@/api/folders";
+import Link from "next/link";
 interface FolderFilterBoxProps {
   folderData: FolderDataType | null;
   setFolderName: Dispatch<SetStateAction<string>>;
@@ -14,46 +16,56 @@ interface FolderFilterBoxProps {
 }
 
 const FolderFilterBox = ({
-  folderData,
-  setFolderName,
-  setFolderId,
   setIsShowFuncButtonBox,
   setFolderModalValue,
   setShareUrlFolderId,
+  params,
 }: FolderFilterBoxProps) => {
-  const [activeFilterId, setActiveFilterId] = useState("showAll");
+  const [activeFilterId, setActiveFilterId] = useState("");
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["folders"],
+    queryFn: () => getAllFolders(),
+  });
+
+  if (isLoading) {
+    return <div>로딩중입니다</div>;
+  }
+
+  if (error) return <div>{error.message}</div>;
 
   const handleClickFilterButton = (folderName: string, folderId: number) => {
     setIsShowFuncButtonBox(true);
-    setFolderName(folderName);
-    setFolderId("?folderId=" + String(folderId));
     setActiveFilterId(folderId.toString());
     setFolderModalValue(folderName);
     setShareUrlFolderId(folderId.toString());
   };
 
   const handleClickShowAllLinksButton = () => {
-    setFolderName("전체");
     setIsShowFuncButtonBox(false);
-    setFolderId("");
+
     setActiveFilterId("showAll");
   };
   return (
     <div className={styles.link_filter_box}>
-      <ShowAllLinksButton
-        name='전체'
-        activeFilterId={activeFilterId}
-        handleClick={() => handleClickShowAllLinksButton()}
-      />
+      <Link href='/folder'>
+        <ShowAllLinksButton
+          isActive={params?.folderId === undefined}
+          activeFilterId={activeFilterId}
+          handleClick={() => handleClickShowAllLinksButton()}
+        />
+      </Link>
 
-      {folderData?.data.map(({ name, id }) => {
+      {data.map(({ name, id }, index) => {
         return (
-          <FolderFilterButton
-            name={name}
-            key={id}
-            isActive={activeFilterId === String(id)}
-            handleClick={() => handleClickFilterButton(name, id)}
-          />
+          <Link href={`/folder/${id}`} key={id}>
+            <FolderFilterButton
+              name={name}
+              key={id}
+              isActive={params?.folderId === String(id)}
+              handleClick={() => handleClickFilterButton(name, id)}
+            />
+          </Link>
         );
       })}
     </div>

@@ -19,25 +19,17 @@ const LinkFuncButton = ({
   handleDeleteFolderModalClick,
   handleShareFolderModalClick,
 }: LinkFuncButtonProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (buttonName === "이름 변경") {
+      handleRenameFolderModalClick(e);
+    } else if (buttonName === "삭제") {
+      handleDeleteFolderModalClick(e);
+    } else if (buttonName === "공유") {
+      handleShareFolderModalClick(e);
+    }
+  };
   return (
-    <button
-      className={styles.link_func_button}
-      onClick={(e) => {
-        if (buttonName === "이름 변경") {
-          () => {
-            handleRenameFolderModalClick(e);
-          };
-        } else if (buttonName === "삭제") {
-          () => {
-            handleDeleteFolderModalClick(e);
-          };
-        } else if (buttonName === "공유") {
-          () => {
-            handleDeleteFolderModalClick(e);
-          };
-        }
-      }}
-    >
+    <button className={styles.link_func_button} onClick={handleClick}>
       {buttonName}
       <img
         src={`/assets/images/${buttonImageSourceName}_button_icon.svg`}

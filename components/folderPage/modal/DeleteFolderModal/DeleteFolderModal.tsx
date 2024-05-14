@@ -1,7 +1,9 @@
 import styles from "./DeleteFolderModal.module.css";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import DeleteModalButton from "../DeleteButton/DeleteButton";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteFolder } from "@/api/folders";
+import { useRouter } from "next/navigation";
 interface DeleteFolderModalProps {
   FolderModalValue: string;
   handleDeleteFolderModalClick: (e: React.MouseEvent<HTMLImageElement>) => void;
@@ -9,7 +11,24 @@ interface DeleteFolderModalProps {
 const DeleteFolderModal = ({
   FolderModalValue,
   handleDeleteFolderModalClick,
+  folderId,
 }: DeleteFolderModalProps) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const deleteFolderById = useMutation({
+    mutationFn: deleteFolder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["folders"] });
+      router.push("/folder");
+    },
+  });
+
+  console.log(folderId);
+  const handleDeleteButton = () => {
+    deleteFolderById.mutate(folderId);
+    handleDeleteFolderModalClick();
+  };
   return (
     <ModalWrapper>
       <div className={styles["modal-wrapper"]}>
@@ -23,7 +42,9 @@ const DeleteFolderModal = ({
             onClick={handleDeleteFolderModalClick}
           />
         </div>
-        <DeleteModalButton>삭제하기</DeleteModalButton>
+        <DeleteModalButton handleDeleteButton={handleDeleteButton}>
+          삭제하기
+        </DeleteModalButton>
       </div>
     </ModalWrapper>
   );

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./FolderPageMain.module.css";
-import LinkList from "../LinkList/LinkList";
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import LinkListByFolderId from "../LinkListByFolderId/LinkListByFolderId";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import LinkSearchInput from "@/components/common/LinkSearchInput/LinkSearchInput";
 import useModal from "@/hooks/useModal";
 import { LinkDataType } from "@/types/LinkDataTypes";
@@ -15,7 +15,10 @@ import AddLinkInFolder from "../modal/AddLinkInFolder/AddLinkInFolder";
 import ShareFolderModal from "../modal/ShareFolderModal/ShareFolderModal";
 import LinkFuncButtonBox from "../LinkFuncButtonBox/LinkFuncButtonBox";
 import ShowSearchData from "../ShowSearchData/ShowSearchData";
-
+import { useQuery } from "@tanstack/react-query";
+import { getAllLinks } from "@/api/folder";
+import { getUserInfo } from "@/api/user";
+import LinkList from "../LinkList/LinkList";
 interface FolderPageMainProps {
   isShowAddLinkInFolderModal: boolean;
   handleAddLinkInFolderModalClick: (
@@ -30,37 +33,22 @@ const FolderPageMain = ({
   handleAddLinkInFolderModalClick,
   sharedUrl,
   setSharedUrl,
+  params,
 }: FolderPageMainProps) => {
-  const [linkData, setLinkData] = useState<LinkDataType | null>(null);
+  const { data: userData } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUserInfo,
+  });
   const [folderId, setFolderId] = useState("");
 
-  const [folderData, setFolderData] = useState<FolderDataType | null>(null);
-  const getLinkData = async () => {
-    const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/users/3/links${folderId}`
-    );
-    const json: LinkDataType = await response.json();
-    setLinkData(json);
-  };
-
-  const getFolderData = async () => {
-    const response = await fetch(
-      "https://bootcamp-api.codeit.kr/api/users/3/folders"
-    );
-    const json: FolderDataType = await response.json();
-    setFolderData(json);
-  };
-
   useEffect(() => {
-    getLinkData();
-  }, [folderId]);
-
-  useEffect(() => {
-    getFolderData();
+    params !== undefined ? setFolderId(params.folderId) : setFolderId("전체");
   }, []);
 
-  console.log(linkData);
-  console.log(folderData);
+  const [linkData, setLinkData] = useState<LinkDataType | null>(null);
+
+  const [folderData, setFolderData] = useState<FolderDataType | null>(null);
+
   const [folderName, setFolderName] = useState("");
   const [isShowFuncButtonBox, setIsShowFuncButtonBox] = useState(false);
 
@@ -109,10 +97,10 @@ const FolderPageMain = ({
           <FolderFilterBox
             setFolderName={setFolderName}
             setIsShowFuncButtonBox={setIsShowFuncButtonBox}
-            setFolderId={setFolderId}
             setFolderModalValue={setFolderModalValue}
             setShareUrlFolderId={setShareUrlFolderId}
             folderData={folderData}
+            params={params}
           />
           <AddFolderButton
             handleAddFolderModalClick={handleAddFolderModalClick}
@@ -120,7 +108,7 @@ const FolderPageMain = ({
         </div>
         <div className={styles.folder_title_box}>
           <h1 className={styles.folder_title}>{folderName}</h1>
-          {isShowFuncButtonBox && (
+          {params && (
             <LinkFuncButtonBox
               handleRenameFolderModalClick={handleRenameFolderModalClick}
               handleDeleteFolderModalClick={handleDeleteFolderModalClick}
@@ -128,11 +116,20 @@ const FolderPageMain = ({
             />
           )}
         </div>
-        <LinkList
-          handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
-          setSharedUrl={setSharedUrl}
-          linkData={linkData}
-        />
+        {folderId === "전체" ? (
+          <LinkList
+            handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+            setSharedUrl={setSharedUrl}
+            linkData={linkData}
+          />
+        ) : (
+          <LinkListByFolderId
+            handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
+            setSharedUrl={setSharedUrl}
+            linkData={linkData}
+            params={params}
+          />
+        )}
       </div>
 
       {isShowShareFolderModal && (
@@ -140,18 +137,21 @@ const FolderPageMain = ({
           handleShareFolderModalClick={handleShareFolderModalClick}
           FolderModalValue={FolderModalValue}
           ShareUrlFolderId={ShareUrlFolderId}
+          folderId={folderId}
         />
       )}
       {isShowRenameFolderModal && (
         <RenameFolderNameModal
           handleRenameFolderModalClick={handleRenameFolderModalClick}
           FolderModalValue={FolderModalValue}
+          folderId={folderId}
         />
       )}
       {isShowDeleteFolderModal && (
         <DeleteFolderModal
           FolderModalValue={FolderModalValue}
           handleDeleteFolderModalClick={handleDeleteFolderModalClick}
+          folderId={folderId}
         />
       )}
       {isShowAddFolderModal && (

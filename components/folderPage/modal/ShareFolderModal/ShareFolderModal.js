@@ -6,34 +6,35 @@ const ShareFolderModal = ({
   handleShareFolderModalClick,
   FolderModalValue,
   ShareUrlFolderId,
+  folderId,
 }) => {
-  const { Kakao } = window;
+  // const { Kakao } = window;
 
-  useEffect(() => {
-    Kakao.cleanup();
-    Kakao.init("9adbb4d8d436041f3eeadb2a25b525ec");
-  });
-  const shareKakao = () => {
-    Kakao.Share.sendDefault({
-      objectType: "feed",
-      content: {
-        title: "Linkbrary",
-        description: "링크를 공유해보세요",
-        imageUrl: `${process.env.PUBLIC_URL}/assets/images/share_url_copy_url_icon.svg`,
-        link: {
-          mobileWebUrl: window.location.host + "/shared/" + ShareUrlFolderId,
-        },
-      },
-      buttons: [
-        {
-          title: "나도 테스트 하러가기",
-          link: {
-            mobileWebUrl: window.location.host + "/shared/" + ShareUrlFolderId,
-          },
-        },
-      ],
-    });
-  };
+  // useEffect(() => {
+  //   Kakao.cleanup();
+  //   Kakao.init("9adbb4d8d436041f3eeadb2a25b525ec");
+  // });
+  // const shareKakao = () => {
+  //   Kakao.Share.sendDefault({
+  //     objectType: "feed",
+  //     content: {
+  //       title: "Linkbrary",
+  //       description: "링크를 공유해보세요",
+  //       imageUrl: `${process.env.PUBLIC_URL}/assets/images/share_url_copy_url_icon.svg`,
+  //       link: {
+  //         mobileWebUrl: window.location.host + "/shared/" + ShareUrlFolderId,
+  //       },
+  //     },
+  //     buttons: [
+  //       {
+  //         title: "나도 테스트 하러가기",
+  //         link: {
+  //           mobileWebUrl: window.location.host + "/shared/" + ShareUrlFolderId,
+  //         },
+  //       },
+  //     ],
+  //   });
+  // };
 
   return (
     <ModalWrapper>
@@ -48,7 +49,6 @@ const ShareFolderModal = ({
             <img
               src='assets/images/share_url_kakao_talk_icon.svg'
               alt='kakao-talk-shared-icon'
-              onClick={shareKakao}
             />
             <p>카카오톡</p>
           </div>
@@ -61,7 +61,7 @@ const ShareFolderModal = ({
                   "https://twitter.com/intent/tweet?text=" +
                     window.location.host +
                     "/shared/" +
-                    ShareUrlFolderId
+                    folderId
                 );
               }}
             />
@@ -74,11 +74,9 @@ const ShareFolderModal = ({
               src='assets/images/share_url_copy_url_icon.svg'
               onClick={() => {
                 window.navigator.clipboard
-                  .writeText(
-                    window.location.host + "/shared/" + ShareUrlFolderId
-                  )
+                  .writeText(window.location.host + "/shared/" + folderId)
                   .then(() => {
-                    alert("링크 복사완료");
+                    alert("공유 링크가 복사되었습니다");
                   });
               }}
             />

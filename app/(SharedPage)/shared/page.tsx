@@ -1,16 +1,9 @@
-import Profile from "@/components/sharedPage/Profile/Profile";
-import SharedPageMain from "@/components/sharedPage/SharedPageMain/SharedPageMain";
+export const metadata = {
+  title: "Shared",
+};
 
 const SharedPage = async () => {
-
-  
-
-  return (
-    <>
-      <Profile />
-      <SharedPageMain />
-    </>
-  );
+  return <div></div>;
 };
 
 export default SharedPage;
