@@ -24,8 +24,7 @@ const LinkList = ({
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log(data);
-  console.log("전체 데이터입니다");
+
   return (
     <div>
       {linkData?.data.length === 0 ? (

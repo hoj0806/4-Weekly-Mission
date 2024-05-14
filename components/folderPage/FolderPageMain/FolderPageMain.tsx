@@ -45,7 +45,6 @@ const FolderPageMain = ({
     params !== undefined ? setFolderId(params.folderId) : setFolderId("전체");
   }, []);
 
-  console.log(folderId);
   const [linkData, setLinkData] = useState<LinkDataType | null>(null);
 
   const [folderData, setFolderData] = useState<FolderDataType | null>(null);
