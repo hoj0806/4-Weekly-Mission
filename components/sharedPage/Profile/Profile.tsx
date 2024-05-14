@@ -16,7 +16,7 @@ const Profile = ({ params }: { folderId: number }) => {
   });
 
   console.log(folderData);
-  
+
   return (
     <div className={styles["profile-wrapper"]}>
       <div className={styles["profile-inside-wrapper"]}>
