@@ -11,6 +11,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 const FolderPage = () => {
   const {
@@ -19,6 +20,7 @@ const FolderPage = () => {
   } = useModal(false);
   const queryClient = new QueryClient();
 
+  const params = useParams();
   const [sharedUrl, setSharedUrl] = useState("");
   return (
     <>
@@ -35,6 +37,7 @@ const FolderPage = () => {
             handleAddLinkInFolderModalClick={handleAddLinkInFolderModalClick}
             sharedUrl={sharedUrl}
             setSharedUrl={setSharedUrl}
+            params={params}
           />
         </HydrationBoundary>
       </HeaderFooterLayout>

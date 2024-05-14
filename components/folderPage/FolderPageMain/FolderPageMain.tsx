@@ -26,6 +26,7 @@ interface FolderPageMainProps {
   ) => void;
   sharedUrl: string;
   setSharedUrl: Dispatch<SetStateAction<string>>;
+  params: { folderId: string };
 }
 
 const FolderPageMain = ({
