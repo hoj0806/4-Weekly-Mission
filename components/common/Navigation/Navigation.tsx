@@ -28,7 +28,7 @@ const Navigation = () => {
           />
         </Link>
         <div className={styles["profile-wrapper"]}>
-          {accessToken !== undefined ? (
+          {accessToken !== null ? (
             <>
               {data?.map((item) => {
                 return (
